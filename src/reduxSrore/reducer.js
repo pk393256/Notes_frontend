@@ -1,14 +1,28 @@
-import {TOGGLE} from './action';
+import { TOGGLE_TASK, TOGGLE_AUTH } from './action';
 
-let initialState = {
-    title:'',
-    status:false,
-    
+let initialTask = {
+    title: '',
+    status: false,
+
 }
-export function reducer(state=initialState,action){
-    switch(action.type){
-        case TOGGLE:
-            return {...store,} 
+export function taskReducer(state = initialTask, action) {
+    switch (action.type) {
+        case TOGGLE_TASK:
+            return { ...state, status: !status }
+        default:
+            return state;
+    }
+}
 
+let initialAuth = {
+    status: false
+}
+
+export function authReducer(state = initialAuth, action) {
+    switch (action.type) {
+        case TOGGLE_AUTH:
+            return { status: !status };
+        default:
+            return state;
     }
 }
