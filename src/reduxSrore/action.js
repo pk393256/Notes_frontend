@@ -1,9 +1,10 @@
 export const TOGGLE_TASK = "TOGGLE_TASK";
 export const TOGGLE_AUTH = 'TOGGLE_AUTH';
 
-export function toggleTask(){
+export function toggleToken(payload){
     return {
-        type:TOGGLE_TASK
+        type:TOGGLE_TASK,
+        payload
     }
 }
 
