@@ -30,6 +30,7 @@ export function Login() {
             navigate('/note')
         } else {
             dispatch(toggleToken(''))
+            dispatch(toggleAuth())
             alert(dataCameFromBackend.status)
         }
 
@@ -37,6 +38,9 @@ export function Login() {
 
         // console.log(dataCameFromBackend)
         // console.log('data',data)
+    }
+    function register(){
+        navigate('/register')
     }
     useEffect(() => {
         let authenticationStatus = store.getState().authReducer.status;
@@ -53,6 +57,10 @@ export function Login() {
         marginLeft={'25%'}
         height={'70%'}
         > */}
+        <Box>
+            
+        </Box>
+        <Button style={{marginLeft:"80%"}} onClick={register}>Register</Button>
             <h1 style={{ marginLeft: '4%' }}>LOGIN</h1>
             {/* <TextField label='Outlined' variant="required"/> */}
             <Grid container

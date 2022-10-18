@@ -1,15 +1,18 @@
-import { Button } from "@mui/material";
+import { Button,TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useDispatch, getState } from "react-redux";
 import { toggleAuth,toggleToken } from "../reduxSrore/action";
 import store from "../reduxSrore/store";
+import { useNavigate } from "react-router-dom";
 
 
 export function UserNotes() {
     const [allUserNote, setAllUserNote] = useState([]);
     const [authStatusChanged, setAuthStatusChanged] = useState(0);
     const [reRender,setReRender] = useState(0);
+    const [taskAdd,setTaskAdd] = useState('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     async function getAllUserNote() {
         let { token } = store.getState().tokenReducer;
         console.log('token', token)
@@ -68,6 +71,25 @@ export function UserNotes() {
         // getAllUserNote()
     }
 
+    function logout(){
+        dispatch(toggleAuth())
+        dispatch(toggleToken(''))
+        navigate('/')
+    }
+    async function submit(){
+        console.log('taskAdd',taskAdd)
+        let { token } = store.getState().tokenReducer;
+
+        await fetch(`http://localhost:8080/note`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                token
+            },
+            body:JSON.stringify({title:taskAdd,workStatus:'false'})
+        })
+        setReRender(reRender+1)
+    }
     useEffect(() => {
         getAllUserNote()
     }, [reRender])
@@ -76,8 +98,15 @@ export function UserNotes() {
     return (
         <>
         <div>
-            <Button style={{marginLeft:"80%"}} >Logout</Button>
+            <Button style={{marginLeft:"80%"}} onClick={logout} >Logout</Button>
         </div>
+
+        {/* adding note section */}
+        <TextField label='Add Task' variant='filled' onChange={(e)=>setTaskAdd(e.target.value)}/>
+        <br/>
+        <Button onClick={submit}>Add</Button>
+
+
         <div style={{display:'grid',gap:'10px',gridTemplateColumns:"repeat(3,1fr)"}}>
             {allUserNote.map((data) => (
                 <div key={data._id} style={{border:"1px blue solid"}}>
@@ -85,13 +114,13 @@ export function UserNotes() {
                     {
                         data.workStatus=='true' ?
                             <>
-                                <h4>Completed</h4>
+                                <h4 style={{color:'green'}}>Completed</h4>
                                 <Button id={data._id} name={data.workStatus} onClick={(e)=>{update(e.target)}}>Mark as Not Completed</Button>
                                 <Button id={data._id} name={data.workStatus} onClick={(e)=>{deleteNote(e.target.id)}}>Delete</Button>
                             </>
                             :
                             <>
-                                <h4>Not Completed</h4>
+                                <h4 style={{color:'red'}}>Not Completed</h4>
                                 <Button id={data._id} name={data.workStatus} onClick={(e)=>{update(e.target)}}>Mark as completed</Button>
                                 <Button id={data._id} name={data.workStatus} onClick={(e)=>{deleteNote(e.target.id)}}>Delete</Button>
                             </>

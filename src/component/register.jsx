@@ -1,13 +1,14 @@
 import { Input, Button, Box,Divider,Grid } from '@mui/material';
 import {useState,useEffect} from 'react';
 import TextField from '@mui/material/TextField';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export function Register() {
 
         const [name,setName] = useState('');
         const [email,setEmail] = useState('');
         const [password,setPassword] = useState('');
-
+        const navigate = useNavigate();
         function submit(){
             // console.log('name',name)
             if(name=='' || email=='' || password==''){
@@ -23,6 +24,9 @@ export function Register() {
                 .then(data=>alert(data.status))
             }
         }
+        function login(){
+            navigate('/')
+        }
 
     return (
         <>
@@ -31,6 +35,7 @@ export function Register() {
         marginLeft={'25%'}
         height={'70%'}
         > */}
+        <Button style={{marginLeft:"80%"}} onClick={login}>Login</Button>
 
             <h1 style={{marginLeft:'4%'}}>REGISTER</h1>
             {/* <TextField label='Outlined' variant="required"/> */}
