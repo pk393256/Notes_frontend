@@ -88,23 +88,32 @@ export function UserNotes() {
             },
             body:JSON.stringify({title:taskAdd,workStatus:'false'})
         })
+        // navigate('/note')
+        setTaskAdd('');
         setReRender(reRender+1)
     }
+    async function input(e){
+        setTaskAdd(e.target.value)
+    }
+
     useEffect(() => {
-        getAllUserNote()
+        getAllUserNote();
+        
     }, [reRender])
 
 
     return (
         <>
+        <br/>
         <div>
-            <Button style={{marginLeft:"80%"}} onClick={logout} >Logout</Button>
+            <Button variant="contained" style={{marginLeft:"80%"}} onClick={logout} >Logout</Button>
         </div>
 
         {/* adding note section */}
-        <TextField label='Add Task' variant='filled' onChange={(e)=>setTaskAdd(e.target.value)}/>
-        <br/>
-        <Button onClick={submit}>Add</Button>
+        <TextField label='Add Task' variant='filled' value={taskAdd} style={{marginBottom:'3px'}} onChange={(e)=>input(e)}/>
+        <br />
+        {/* <br/> */}
+        <Button variant="contained" style={{marginBottom:'3px'}}  onClick={submit}>Add</Button>
 
 
         <div style={{display:'grid',gap:'10px',gridTemplateColumns:"repeat(3,1fr)"}}>
@@ -115,14 +124,14 @@ export function UserNotes() {
                         data.workStatus=='true' ?
                             <>
                                 <h4 style={{color:'green'}}>Completed</h4>
-                                <Button id={data._id} name={data.workStatus} onClick={(e)=>{update(e.target)}}>Mark as Not Completed</Button>
-                                <Button id={data._id} name={data.workStatus} onClick={(e)=>{deleteNote(e.target.id)}}>Delete</Button>
+                                <Button variant="contained" color="secondary" id={data._id} name={data.workStatus} onClick={(e)=>{update(e.target)}}>Mark as Not Completed</Button>
+                                <Button variant="contained" color="error" id={data._id} name={data.workStatus} onClick={(e)=>{deleteNote(e.target.id)}}>Delete</Button>
                             </>
                             :
                             <>
                                 <h4 style={{color:'red'}}>Not Completed</h4>
-                                <Button id={data._id} name={data.workStatus} onClick={(e)=>{update(e.target)}}>Mark as completed</Button>
-                                <Button id={data._id} name={data.workStatus} onClick={(e)=>{deleteNote(e.target.id)}}>Delete</Button>
+                                <Button variant="contained" color="success" id={data._id} name={data.workStatus} onClick={(e)=>{update(e.target)}}>Mark as completed</Button>
+                                <Button variant="contained" color="error" id={data._id} name={data.workStatus} onClick={(e)=>{deleteNote(e.target.id)}}>Delete</Button>
                             </>
                     }
 

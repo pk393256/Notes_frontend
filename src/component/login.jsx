@@ -60,7 +60,8 @@ export function Login() {
         <Box>
             
         </Box>
-        <Button style={{marginLeft:"80%"}} onClick={register}>Register</Button>
+        <br/>
+        <Button variant='contained' style={{marginLeft:"80%"}} onClick={register}>Register</Button>
             <h1 style={{ marginLeft: '4%' }}>LOGIN</h1>
             {/* <TextField label='Outlined' variant="required"/> */}
             <Grid container

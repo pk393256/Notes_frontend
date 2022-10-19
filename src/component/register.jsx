@@ -9,21 +9,31 @@ export function Register() {
         const [email,setEmail] = useState('');
         const [password,setPassword] = useState('');
         const navigate = useNavigate();
-        function submit(){
+        async function submit(){
             // console.log('name',name)
             if(name=='' || email=='' || password==''){
                 alert('Some field is missing')
+
             }else{
-                fetch(`http://localhost:8080/user`,{
+                let register = await fetch(`http://localhost:8080/user`,{
                     method:"POST",
                     headers:{
                         'Content-Type':'application/json'
                     },
                     body:JSON.stringify({name,email,password})
-                }).then((res)=>res.json())
-                .then(data=>alert(data.status))
+                })
+                
+                let res = await register.json();
+                let data = await res
+                // setEmail('')
+                // setPassword('')
+                alert(data.status)
+                navigate('/login')
+                console.log('register data',data)
             }
+            
         }
+        // useEffect(()=>{},[email])
         function login(){
             navigate('/')
         }
@@ -35,7 +45,8 @@ export function Register() {
         marginLeft={'25%'}
         height={'70%'}
         > */}
-        <Button style={{marginLeft:"80%"}} onClick={login}>Login</Button>
+        <br/>
+        <Button variant='contained' style={{marginLeft:"80%"}} onClick={login}>Login</Button>
 
             <h1 style={{marginLeft:'4%'}}>REGISTER</h1>
             {/* <TextField label='Outlined' variant="required"/> */}
