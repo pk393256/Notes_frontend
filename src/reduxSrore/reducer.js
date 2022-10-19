@@ -26,3 +26,4 @@ export function authReducer(state = initialAuth, action) {
             return state;
     }
 }
+
