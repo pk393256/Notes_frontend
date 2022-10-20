@@ -13,7 +13,7 @@ export function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     async function submit() {
-        let data = await fetch(`http://localhost:8080/login`, {
+        let data = await fetch(`http://54.238.235.98:8080/login`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

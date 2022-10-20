@@ -15,7 +15,7 @@ export function Register() {
                 alert('Some field is missing')
 
             }else{
-                let register = await fetch(`http://localhost:8080/user`,{
+                let register = await fetch(`http://54.238.235.98:8080/user`,{
                     method:"POST",
                     headers:{
                         'Content-Type':'application/json'
