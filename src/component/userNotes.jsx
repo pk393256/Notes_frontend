@@ -124,13 +124,13 @@ export function UserNotes() {
                         data.workStatus=='true' ?
                             <>
                                 <h4 style={{color:'green'}}>Completed</h4>
-                                <Button variant="contained" color="secondary" id={data._id} name={data.workStatus} onClick={(e)=>{update(e.target)}}>Mark as Not Completed</Button>
+                                <Button variant="contained" color="success" id={data._id} name={data.workStatus} onClick={(e)=>{update(e.target)}}>Mark as Not Completed</Button>
                                 <Button variant="contained" color="error" id={data._id} name={data.workStatus} onClick={(e)=>{deleteNote(e.target.id)}}>Delete</Button>
                             </>
                             :
                             <>
                                 <h4 style={{color:'red'}}>Not Completed</h4>
-                                <Button variant="contained" color="success" id={data._id} name={data.workStatus} onClick={(e)=>{update(e.target)}}>Mark as completed</Button>
+                                <Button variant="contained" color="secondary" id={data._id} name={data.workStatus} onClick={(e)=>{update(e.target)}}>Mark as completed</Button>
                                 <Button variant="contained" color="error" id={data._id} name={data.workStatus} onClick={(e)=>{deleteNote(e.target.id)}}>Delete</Button>
                             </>
                     }
