@@ -16,7 +16,7 @@ export function UserNotes() {
     async function getAllUserNote() {
         let { token } = store.getState().tokenReducer;
         console.log('token', token)
-        let allNotePromise2 = await fetch(`http://54.238.235.98:8080/note`, {
+        let allNotePromise2 = await fetch(`https://my-note39.herokuapp.com/note`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export function UserNotes() {
         console.log('data to update',upDateData)
         let { token } = store.getState().tokenReducer;
 
-        await fetch(`http://54.238.235.98:8080/note/${_id}`,{
+        await fetch(`https://my-note39.herokuapp.com/note/${_id}`,{
             method:"PATCH",
             headers:{
                 'Content-Type':'application/json',
@@ -59,7 +59,7 @@ export function UserNotes() {
         console.log("_id",id)
         let { token } = store.getState().tokenReducer;
 
-        await fetch(`http://54.238.235.98:8080/note/${id}`,{
+        await fetch(`https://my-note39.herokuapp.com/note/${id}`,{
             method:"DELETE",
             headers:{
                 'Content-Type':'application/json',
@@ -80,7 +80,7 @@ export function UserNotes() {
         console.log('taskAdd',taskAdd)
         let { token } = store.getState().tokenReducer;
 
-        await fetch(`http://54.238.235.98:8080/note`,{
+        await fetch(`https://my-note39.herokuapp.com/note`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
